@@ -31,6 +31,16 @@ tasks.register<Copy>("unzipNewrelic") {
 }
 
 dependencies {
+    // Security fix for CVE-2024-12801: Upgrade logback-core to address SSRF vulnerability
+    constraints {
+        implementation("ch.qos.logback:logback-core:1.3.15") {
+            because("CVE-2024-12801: SSRF vulnerability in versions 0.1 to 1.3.14")
+        }
+        implementation("ch.qos.logback:logback-classic:1.3.15") {
+            because("CVE-2024-12801: SSRF vulnerability in versions 0.1 to 1.3.14")
+        }
+    }
+
     implementation ("commons-fileupload:commons-fileupload:1.3.3")
     implementation ("org.apache.commons:commons-lang3:3.9")
     implementation ("org.apache.commons:commons-collections4:4.4")
